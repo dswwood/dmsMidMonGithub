@@ -1,0 +1,15 @@
+*.ini
+*.msgdb
+*.ico
+*.res
+*.exe
+*.o
+*.ppu
+*.bak
+*.obj
+*.ps1
+*.lps
+# folders
+.idea\
+backup\
+lib\

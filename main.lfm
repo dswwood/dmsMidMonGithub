@@ -1,0 +1,402 @@
+object MainForm: TMainForm
+  Left = 814
+  Height = 859
+  Top = 262
+  Width = 1448
+  Caption = 'Dms Midi Monitor / Debugger'
+  ClientHeight = 859
+  ClientWidth = 1448
+  DesignTimePPI = 144
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  ShowHint = True
+  LCLVersion = '3.4.0.0'
+  object MidiMonPageControl: TPageControl
+    Left = 0
+    Height = 820
+    Top = 3
+    Width = 1448
+    ActivePage = MidiMonTabSheet
+    Align = alClient
+    BorderSpacing.Top = 3
+    HotTrack = True
+    Style = tsFlatButtons
+    TabIndex = 0
+    TabOrder = 0
+    TabWidth = 120
+    object MidiMonTabSheet: TTabSheet
+      Caption = 'Midi Monitor'
+      ClientHeight = 779
+      ClientWidth = 1440
+      object MidiSendGroupBox: TGroupBox
+        Left = 0
+        Height = 164
+        Top = 4
+        Width = 1440
+        Align = alTop
+        BorderSpacing.Top = 4
+        BorderSpacing.Bottom = 4
+        Caption = 'Midi to Send OUT'
+        ClientHeight = 134
+        ClientWidth = 1436
+        ParentBackground = False
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 0
+        object MidiSendMemo: TMemo
+          Left = 8
+          Height = 128
+          Hint = 'Enter the MIDI bytes to send in Hex format and press the [Send] button.'#13#10'Example: F0 41 10 00 00 00 00 0B 12 20 00 00 00 00 00 00 01 F7'#13#10'You can send a series of messages by entering them on separate lines.'#13#10'To enter a comment, start a line with a semicolon ;'#13#10'See Readme.md for more details'
+          Top = 0
+          Width = 1083
+          Anchors = [akTop, akLeft, akRight, akBottom]
+          Font.CharSet = ANSI_CHARSET
+          Font.Name = 'Courier New'
+          Font.Pitch = fpFixed
+          Font.Quality = fqDraft
+          ParentFont = False
+          ParentShowHint = False
+          ScrollBars = ssAutoBoth
+          ShowHint = True
+          TabOrder = 1
+        end
+        object SaveMsgGroupBox: TGroupBox
+          Left = 1091
+          Height = 118
+          Top = 0
+          Width = 334
+          Anchors = [akTop, akRight]
+          Caption = 'Saved messages'
+          ClientHeight = 88
+          ClientWidth = 330
+          TabOrder = 2
+          object SaveMsgComboBox: TComboBox
+            Left = 8
+            Height = 33
+            Hint = 'Enter a name to save, load, or delete messages in  [Midi to Send OUT].'#13#10'Select an item to load it message in  [Midi to Send OUT].'
+            Top = 1
+            Width = 326
+            ItemHeight = 25
+            TabOrder = 0
+            OnSelect = SaveMsgComboBoxSelect
+          end
+          object SaveMsgButton: TButton
+            Left = 8
+            Height = 38
+            Hint = 'Saves or updates the text in [MIDI to Send OUT]'
+            Top = 40
+            Width = 88
+            Caption = 'Save'
+            TabOrder = 1
+            OnClick = SaveMsgButtonClick
+          end
+          object DeleteMsgButton: TButton
+            Left = 104
+            Height = 38
+            Hint = 'Deletes the saved message'
+            Top = 40
+            Width = 88
+            Caption = 'Delete'
+            TabOrder = 2
+            OnClick = DeleteMsgButtonClick
+          end
+        end
+        object MidiSendButton: TButton
+          Left = 931
+          Height = 34
+          Top = 84
+          Width = 113
+          Anchors = [akRight, akBottom]
+          Caption = '&Send'
+          ParentFont = False
+          ParentShowHint = False
+          TabOrder = 0
+          OnClick = MidiSendButtonClick
+        end
+      end
+      object MidiMsgGroupBox: TGroupBox
+        Left = 0
+        Height = 264
+        Top = 184
+        Width = 1440
+        Align = alClient
+        Caption = 'Midi Messages IN'
+        ClientHeight = 234
+        ClientWidth = 1436
+        ParentFont = False
+        TabOrder = 1
+        object MidiMsgMemo: TMemo
+          Left = 0
+          Height = 234
+          Hint = 'Shows short MIDI messages from the opened device'
+          Top = 0
+          Width = 1436
+          Align = alClient
+          Font.CharSet = ANSI_CHARSET
+          Font.Name = 'Courier New'
+          Font.Pitch = fpFixed
+          Font.Quality = fqDraft
+          ParentFont = False
+          ScrollBars = ssAutoBoth
+          TabOrder = 0
+        end
+      end
+      object SysexGroupBox: TGroupBox
+        Left = 0
+        Height = 315
+        Top = 464
+        Width = 1440
+        Align = alBottom
+        BorderSpacing.Top = 4
+        Caption = 'Sysex Messages IN'
+        ClientHeight = 285
+        ClientWidth = 1436
+        ParentFont = False
+        TabOrder = 2
+        object SysExMemo: TMemo
+          Left = 0
+          Height = 285
+          Hint = 'Shows sysex message from the open device'
+          Top = 0
+          Width = 1436
+          Align = alClient
+          Font.CharSet = ANSI_CHARSET
+          Font.Name = 'Courier New'
+          Font.Pitch = fpFixed
+          Font.Quality = fqDraft
+          ParentFont = False
+          ScrollBars = ssAutoBoth
+          TabOrder = 0
+        end
+      end
+      object Splitter1: TSplitter
+        Cursor = crVSplit
+        Left = 0
+        Height = 12
+        Top = 172
+        Width = 1440
+        Align = alTop
+        ParentColor = False
+        ResizeAnchor = akTop
+      end
+      object Splitter2: TSplitter
+        Cursor = crVSplit
+        Left = 0
+        Height = 12
+        Top = 448
+        Width = 1440
+        Align = alBottom
+        ParentColor = False
+        ResizeAnchor = akBottom
+      end
+    end
+    object SettingsTabSheet: TTabSheet
+      Caption = 'Settings'
+      ClientHeight = 779
+      ClientWidth = 1440
+      object GroupBox1: TGroupBox
+        Left = 24
+        Height = 240
+        Top = 24
+        Width = 624
+        Caption = 'MIDI In / Out'
+        ClientHeight = 210
+        ClientWidth = 620
+        TabOrder = 0
+        object MidiInListBox: TListBox
+          Left = 16
+          Height = 120
+          Top = 32
+          Width = 286
+          ItemHeight = 0
+          ParentFont = False
+          Style = lbOwnerDrawFixed
+          TabOrder = 0
+          OnDrawItem = MidiListBoxDrawItem
+        end
+        object MidiOutListBox: TListBox
+          Left = 320
+          Height = 120
+          Top = 32
+          Width = 286
+          ItemHeight = 0
+          Style = lbOwnerDrawFixed
+          TabOrder = 1
+          OnDrawItem = MidiListBoxDrawItem
+        end
+        object Label2: TLabel
+          Left = 16
+          Height = 25
+          Top = 0
+          Width = 59
+          Caption = 'MIDI In'
+        end
+        object Label3: TLabel
+          Left = 320
+          Height = 25
+          Top = 0
+          Width = 74
+          Caption = 'MIDI Out'
+        end
+        object MidiInCheckBox: TCheckBox
+          Left = 20
+          Height = 29
+          Top = 161
+          Width = 69
+          Caption = 'Open'
+          TabOrder = 2
+          OnChange = MidiToggleCheckBoxChange
+        end
+        object MidiOutCheckbox: TCheckBox
+          Left = 320
+          Height = 29
+          Top = 161
+          Width = 69
+          Caption = 'Open'
+          TabOrder = 3
+          OnChange = MidiToggleCheckBoxChange
+        end
+      end
+      object Label1: TLabel
+        Left = 24
+        Height = 89
+        Top = 272
+        Width = 624
+        AutoSize = False
+        Caption = 'If your device has a way to make the MIDI OUT port act as a MIDI THRU '#13#10'port, disable that function on your device. Otherwise, any midi you send'#13#10'will feed back to the MIDI IN device then out again in an endless loop.'
+        Font.CharSet = ANSI_CHARSET
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Font.Style = [fsBold]
+        ParentFont = False
+        WordWrap = True
+      end
+      object Panel1: TPanel
+        Left = 24
+        Height = 139
+        Top = 395
+        Width = 608
+        ClientHeight = 139
+        ClientWidth = 608
+        TabOrder = 1
+        object SysexDelayTrackBar: TTrackBar
+          Left = 32
+          Height = 38
+          Hint = 'Number of milliseconds to delay between sending sysex messages.'#13#10'This allows devices a bit of time to digest sysex messages.'#13#10'It is useful when you enter multiple messages in "Midi to Send OUT".'#13#10'You can leave it set to zero unless necessary.'
+          Top = 48
+          Width = 550
+          Max = 1000
+          OnChange = SysexDelayTrackBarChange
+          Position = 0
+          OnExit = SysexDelayTrackBarExit
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 0
+        end
+        object SysexDelayLabel: TLabel
+          Left = 296
+          Height = 25
+          Top = 88
+          Width = 10
+          Caption = '0'
+        end
+        object Label4: TLabel
+          Left = 40
+          Height = 25
+          Top = 8
+          Width = 428
+          Caption = 'Millisecond to delay between sending sysex messages'
+        end
+      end
+    end
+    object CalcTabSheet: TTabSheet
+      Caption = 'Calc'
+      ClientHeight = 779
+      ClientWidth = 1440
+      ParentShowHint = False
+      ShowHint = True
+      object TestMidiEdit: TLabeledEdit
+        Left = 32
+        Height = 33
+        Top = 32
+        Width = 664
+        EditLabel.Height = 25
+        EditLabel.Width = 664
+        EditLabel.Caption = 'Input'
+        TabOrder = 0
+      end
+      object HexStringToAsciiBitBtn: TBitBtn
+        Left = 32
+        Height = 45
+        Hint = 'Converts midi string hex to ascii. '#13#10'For example, Enter "61 62 63 64 65 66 67" and see "abcdefg".'#13#10'Unprintable asciii characters are shows a hex values in parentheses.'
+        Top = 152
+        Width = 217
+        Caption = 'Hex String To ASCII'
+        OnClick = HexStringToAsciiBitBtnClick
+        TabOrder = 1
+      end
+      object DebugMemo: TMemo
+        Left = 272
+        Height = 668
+        Top = 88
+        Width = 1169
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        Font.CharSet = ANSI_CHARSET
+        Font.Name = 'Courier New'
+        Font.Pitch = fpFixed
+        Font.Quality = fqDraft
+        ParentFont = False
+        ScrollBars = ssAutoVertical
+        TabOrder = 2
+      end
+      object TestRolandChecksumButton: TButton
+        Left = 43
+        Height = 38
+        Hint = 'Shows the Roland checksum of a string of hex byte values.'#13#10'Enclose the bytes in brackets like so: "[20 00 00 00]" and see "20 00 00 00 60". So, "60" is the checksum.'
+        Top = 440
+        Width = 199
+        Caption = 'Test checkum'
+        TabOrder = 3
+        OnClick = TestRolandChecksumButtonClick
+      end
+      object AsciiToHexStringButton: TButton
+        Left = 32
+        Height = 38
+        Hint = 'Converts ascii string to a hex string. '#13#10'For example, Enter "abcdefg" and see "61 62 63 64 65 66 67"'
+        Top = 200
+        Width = 217
+        Caption = 'ASCII To Hex String'
+        TabOrder = 4
+        OnClick = AsciiToHexStringButtonClick
+      end
+      object DumpTDWordButton: TButton
+        Left = 35
+        Height = 38
+        Hint = 'Sets a TDWord value according to a hex, decimal, or binary number and shows the values.'#13#10#13#10'Input format should be "F0 F1 F2 F3" for hex, "12345d" for decimal, or 10101010b for binary'
+        Top = 312
+        Width = 213
+        Caption = 'Dump TDWord'
+        TabOrder = 5
+        OnClick = DumpTDWordButtonClick
+      end
+      object ConvertButton: TButton
+        Left = 35
+        Height = 45
+        Hint = 'Shows numbers in hex, binary, and decimal.'#13#10'Input format:'#13#10'  Hex values should end with a "h", '#13#10'  Decimal values should end with a "d"'#13#10'  Binary values should end with a "b". '#13#10#13#10'Examples: F013h, 1234d, 10010010b.'
+        Top = 88
+        Width = 207
+        Caption = 'Convert'
+        TabOrder = 6
+        OnClick = ConvertButtonClick
+      end
+    end
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Height = 36
+    Top = 823
+    Width = 1448
+    Panels = <>
+  end
+end
